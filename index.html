@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SessionTrail — Photo Journal &amp; GPX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SessionTrail is a photography journal for serious shooters. Plan a shoot, record it on the trail with GPX + photo log + voice memos, reflect on the result. Built for landscape, astro, wildlife and travel photographers.">
+  <link rel="icon" href="logo.png" type="image/x-icon">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; color: #2a2a2a; background: #fffdf8; }
+    header { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 10px; }
+    header h1 { margin: 0; font-size: 20px; display: flex; align-items: center; }
+    header h1 span { font-size: 24px; margin-right: 10px; }
+    nav a { color: white; margin: 0 10px; text-decoration: none; font-weight: 600; transition: opacity 0.3s; }
+    nav a:hover { opacity: 0.8; text-decoration: underline; }
+    .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    h2 { color: #1f2937; font-size: 2em; margin-bottom: 20px; }
+    h3 { color: #b45309; margin-top: 30px; font-size: 1.4em; }
+    ul { margin-left: 20px; line-height: 2; }
+    ul li { margin-bottom: 8px; }
+    a.button { display: inline-block; padding: 12px 30px; margin: 20px 0; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); transition: transform 0.3s, box-shadow 0.3s; }
+    a.button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6); }
+    .hidden { display: none; }
+    footer { text-align: center; padding: 20px; font-size: 0.9em; color: #6b7280; border-top: 1px solid #e5e7eb; margin-top: 40px; }
+    select { padding: 8px 12px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.2); color: white; font-weight: 600; cursor: pointer; }
+    select option { color: #333; }
+    .faq-item { margin-bottom: 25px; background: #fffbeb; padding: 20px; border-radius: 8px; border-left: 4px solid #f59e0b; }
+    .faq-item strong { color: #b45309; font-size: 1.1em; display: block; margin-bottom: 10px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; }
+    .feature-card { background: #fffbeb; padding: 20px; border-radius: 10px; border: 2px solid #fde68a; }
+    .feature-card h4 { color: #b45309; margin-top: 0; }
+    .note { background: #ede9fe; border-left: 4px solid #8b5cf6; padding: 15px; margin: 20px 0; border-radius: 5px; }
+    .note strong { color: #5b21b6; }
+    .disclaimer-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; margin: 30px 0; border-radius: 8px; }
+    .disclaimer-box strong { color: #92400e; font-size: 1.1em; }
+    .disclaimer-box p { margin: 10px 0; line-height: 1.8; }
+    .highlight-box { background: linear-gradient(135deg, #fef3c7, #fde68a); border-left: 4px solid #d97706; padding: 20px; margin: 25px 0; border-radius: 8px; }
+    .highlight-box strong { color: #92400e; font-size: 1.1em; }
+    .highlight-box p { margin: 10px 0; }
+    .privacy-section h3 { color: #b45309; }
+    .privacy-section p, .privacy-section ul { color: #374151; }
+    code { background: #fef3c7; padding: 2px 6px; border-radius: 3px; font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 0.9em; color: #92400e; }
+  </style>
+  <script>
+    function switchLanguage(lang) {
+      document.querySelectorAll('.lang').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.lang-' + lang).forEach(el => el.classList.remove('hidden'));
+      document.getElementById('lang-selector').value = lang;
+      document.documentElement.lang = lang;
+    }
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById(id);
+      if (target) target.classList.remove('hidden');
+    }
+    function getQueryParam(param) {
+      return new URLSearchParams(window.location.search).get(param);
+    }
+    window.onload = function () {
+      const hash = window.location.hash.substring(1);
+      const lang = getQueryParam('lang');
+      if (hash === 'privacy') showSection('privacy');
+      else if (hash === 'support') showSection('support');
+      else showSection('home');
+      const validLangs = ['en', 'de'];
+      switchLanguage(validLangs.includes(lang) ? lang : 'en');
+    };
+  </script>
+</head>
+<body>
+<!-- ════════════════════════════ HEADER ════════════════════════════ -->
+<header>
+  <h1><span>📸</span> SessionTrail</h1>
+  <nav>
+    <a href="#home"    onclick="showSection('home')">Home</a>
+    <a href="#support" onclick="showSection('support')">Support</a>
+    <a href="#privacy" onclick="showSection('privacy')">Privacy</a>
+  </nav>
+  <div>
+    <select id="lang-selector" onchange="switchLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+    </select>
+  </div>
+</header>
+<div class="container">
+<!-- ════════════════════════════ HOME ════════════════════════════ -->
+<div id="home" class="section">
+  <!-- ── ENGLISH ── -->
+  <div class="lang lang-en">
+    <h2>SessionTrail — Photo Journal &amp; GPX</h2>
+    <p>A photography journal where the <em>session</em> — not the individual frame — is the atom. Plan a shoot, record it on the trail with background GPX, photo log and voice memos, reflect on what worked, and ship a one-page PDF shoot report. Built for serious shooters: landscape, astrophotography, wildlife, travel, editorial.</p>
+
+    <div class="highlight-box">
+      <strong>🌅 NOAA conditions on-device · 📍 Background GPX · 🌌 Astro mode · 🇨🇭 Built in Switzerland</strong>
+      <p>Every NOAA calculation (sunrise, golden hour, blue hour, civil/nautical/astronomical twilight, moon phase, Milky Way galactic core) runs on your device — no network needed in the field. iCloud syncs metadata privately; heavy artifacts (GPX, voice memos, reference snaps, PDFs) stay on the recording device.</p>
+    </div>
+
+    <h3>Perfect For</h3>
+    <ul>
+      <li>Landscape photographers planning multi-day trips around golden hour</li>
+      <li>Astrophotographers chasing the Milky Way galactic core</li>
+      <li>Wildlife photographers tracking long stalks and event coverage</li>
+      <li>Travel photographers organising multi-country trips with mixed currencies</li>
+      <li>Working pros logging editorial / commercial assignments</li>
+      <li>Anyone who keeps a written shoot journal today and wants it searchable</li>
+    </ul>
+
+    <h3>Key Features</h3>
+    <ul>
+      <li><strong>Three-phase model:</strong> Plan → Shoot → Review → Archived. Each phase has its own surface; the journal preserves what was true at shoot time</li>
+      <li><strong>NOAA conditions snapshot:</strong> Sunrise, sunset, golden / blue / civil / nautical / astronomical twilight, moon phase + rise/set, Milky Way galactic-core visibility — all on-device</li>
+      <li><strong>Multi-day breakdown:</strong> Per-day golden / blue hour computed live for every day in the planned window</li>
+      <li><strong>Auto-recompute:</strong> Conditions refresh automatically when you tweak the date or location during the Plan phase, then freeze when you advance to Shoot</li>
+      <li><strong>Background GPX recording:</strong> Three sampling modes — Sparse (5–30 min, GPS duty-cycled to save battery), Standard (15–60 s), Dense (1–10 s, for wildlife and events)</li>
+      <li><strong>Photo log per frame:</strong> Subject, lens, filter, frame number, and stabilization setup (handheld, tripod, monopod, gimbal, slider, drone)</li>
+      <li><strong>Voice memos with titles:</strong> AAC into a per-session folder; playback, swipe-to-delete, transcription-ready</li>
+      <li><strong>Reference imagery:</strong> PHPicker for inspiration before the shoot; quick reference snaps from the iPhone camera during the shoot</li>
+      <li><strong>Pre-shoot checklist:</strong> Reusable templates so packing for an astro shoot doesn't start from scratch every time</li>
+      <li><strong>Gear kit with snapshot semantics:</strong> Your loadout survives renames in the source gear catalog — the journal records what you actually took</li>
+      <li><strong>Scoped tags:</strong> <code>subject:landscape</code>, <code>location:wallis</code>, <code>mood:moody</code>, plus custom prefixes</li>
+      <li><strong>Trips:</strong> Group multi-session journeys ("Iceland 2026", "Provence Lavender Week") with one currency, one window, and aggregated costs</li>
+      <li><strong>Cost tracking:</strong> Estimated on Plan, actual on Review, with live variance. Trip-level incidentals (flights, hotel, car rental) separate from per-shoot expenses</li>
+      <li><strong>50+ currencies:</strong> Curated picker (CHF, EUR, USD, GBP, JPY, CLP, ARS, ISK, PEN, BTN…) plus an "Other…" entry that accepts any 3-letter ISO 4217 code</li>
+      <li><strong>One-page PDF shoot report:</strong> Title, dates, location, plan, conditions, gear, reflection, rating, outcomes, costs, photo log table, GPX stats — ready to file, print, or attach to a competition entry</li>
+      <li><strong>Astro appearance mode:</strong> Red on black to preserve dark adaptation under the Milky Way</li>
+      <li><strong>Reflection prompts:</strong> What worked, what didn't, lessons, conditions vs. expectation, free notes — five structured questions per session</li>
+      <li><strong>Star rating + outcomes:</strong> 0–5 stars on the session, plus tagged outcomes (published, printed, submitted, archived, reshoot needed)</li>
+      <li><strong>Active vs Archived sections:</strong> Closed journal entries collapse below active work, with a top-level filter for location / date range / trip</li>
+      <li><strong>Delete confirmation:</strong> Swipe-to-delete asks first — no silent destruction of GPX, voice memos and the photo log</li>
+      <li><strong>iCloud private sync:</strong> Metadata only; binaries stay on the recording device</li>
+      <li><strong>EN + DE:</strong> Full localization for English and German, with photographer jargon ("Shooting", "Aufnahme", "goldene Stunde", "Milchstrasse")</li>
+      <li><strong>Made in Switzerland 🇨🇭</strong></li>
+    </ul>
+
+    <div class="note">
+      <strong>Astro accuracy disclaimer:</strong> Lunar phase and Milky Way calculations are <em>journal grade</em> — within an hour or so, not arcsecond accurate. Synodic-month moon phase ignores perturbation terms; Milky Way visibility approximates the galactic core as a single point at Sagittarius A*. Plenty for "is the moon full this weekend" and "can I shoot the core tonight" decisions; not a substitute for a planetarium.
+    </div>
+
+    <div class="note">
+      <strong>Sync limits in v1:</strong> CloudKit private database syncs metadata (sessions, trips, plans, reflections, costs, photo log). Heavy artifacts — the GPX file, voice memos, reference snaps and generated PDFs — currently stay on the device they were captured on. Multi-device binary sync is on the roadmap.
+    </div>
+
+    <h3>Why Choose SessionTrail?</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>📔 Journal-first</h4>
+        <p>The session is the atom — not the file. Frames live on the camera card; the journal captures intent, conditions, and what worked.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌅 NOAA conditions</h4>
+        <p>Sunrise, sunset, golden / blue / civil / nautical / astronomical twilight, moon phase, Milky Way visibility — computed on-device.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📍 Background GPX</h4>
+        <p>Three sampling modes with duty-cycled GPS for long Sparse intervals. PhotoMetaPro-compatible GPX 1.1 output.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📸 Photo log</h4>
+        <p>Per-frame: subject, lens, filter, frame number, stabilization. Tappable to edit; deletable from the editor.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🎙️ Voice memos</h4>
+        <p>Titled, playable inline, swipe-to-delete. AAC audio in the session's voice folder.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🧳 Trips</h4>
+        <p>Group sessions under a Trip with one currency, one window, and aggregated cost roll-up across all member shoots.</p>
+      </div>
+      <div class="feature-card">
+        <h4>💰 Cost tracking</h4>
+        <p>Estimated on Plan, actual on Review, live variance (red over budget, green under). 50+ currencies plus any custom ISO code.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📄 PDF reports</h4>
+        <p>One-page shoot report ready to print, file, or attach to a competition entry. Trip card + location triple + costs.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌌 Astro mode</h4>
+        <p>Red on black preserves dark adaptation. The same trick astronomy observatories use to keep your night vision intact.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🔒 Privacy by design</h4>
+        <p>iCloud private database for metadata; heavy artifacts stay on device. No third-party analytics, no trackers.</p>
+      </div>
+      <div class="feature-card">
+        <h4>☁️ iCloud sync</h4>
+        <p>Sessions and trips sync across your devices via your private CloudKit database. No account beyond your Apple ID.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🇨🇭 Made in Switzerland</h4>
+        <p>Crafted with Swiss precision. Designed for real shooters by a working photographer.</p>
+      </div>
+    </div>
+
+    <div class="disclaimer-box">
+      <strong>⚠️ Important Disclaimer</strong>
+      <p><strong>Use at your own risk:</strong> SessionTrail is provided "as is" without warranties of any kind. The developer is not liable for damages, losses, or issues arising from the use of this application — including data loss, missed shots, or inaccurate astronomical calculations.</p>
+      <p><strong>Astronomical calculations:</strong> Sunrise / sunset / twilight / moon phase / Milky Way times are journal-grade approximations and should not be the sole basis for time-critical astrophotography decisions. Cross-reference with PhotoPills, Stellarium, or a planetarium for arcsecond-accurate planning.</p>
+      <p><strong>User responsibility:</strong> You are responsible for your own data backups via iCloud and for verifying that GPX exports correctly imported into your downstream tools (PhotoMetaPro, Lightroom, etc.).</p>
+    </div>
+
+    <a href="https://apps.apple.com/app/sessiontrail/id6763770831" class="button">Download on the App Store</a>
+  </div>
+
+  <!-- ── GERMAN ── -->
+  <div class="lang lang-de hidden">
+    <h2>SessionTrail — Foto-Tagebuch &amp; GPX</h2>
+    <p>Ein Foto-Tagebuch, in dem das <em>Shooting</em> — nicht das einzelne Bild — der Atom ist. Plane ein Shooting, halte es im Feld mit Hintergrund-GPX, Foto-Log und Sprachnotizen fest, reflektiere danach und exportiere einen einseitigen PDF-Bericht. Für ernsthafte Fotografen: Landschaft, Astrofotografie, Wildlife, Reisen, Editorial.</p>
+
+    <div class="highlight-box">
+      <strong>🌅 NOAA-Berechnungen auf dem Gerät · 📍 Hintergrund-GPX · 🌌 Astro-Modus · 🇨🇭 Entwickelt in der Schweiz</strong>
+      <p>Jede NOAA-Berechnung (Sonnenaufgang, goldene und blaue Stunde, bürgerliche / nautische / astronomische Dämmerung, Mondphase, Milchstrassen-Kern) läuft auf deinem Gerät — keine Netzverbindung im Feld nötig. iCloud synchronisiert Metadaten privat; schwere Artefakte (GPX, Sprachnotizen, Referenzaufnahmen, PDFs) bleiben auf dem aufnehmenden Gerät.</p>
+    </div>
+
+    <h3>Perfekt Für</h3>
+    <ul>
+      <li>Landschaftsfotografen, die mehrtägige Trips um die goldene Stunde planen</li>
+      <li>Astrofotografen, die dem galaktischen Kern der Milchstrasse nachjagen</li>
+      <li>Wildlife-Fotografen, die lange Anschlich­steinheiten und Event-Coverage protokollieren</li>
+      <li>Reisefotografen, die mehrere Länder mit gemischten Währungen organisieren</li>
+      <li>Berufsfotografen, die Editorial-/Commercial-Aufträge dokumentieren</li>
+      <li>Alle, die heute ein Papier-Shoot-Journal führen und es durchsuchbar machen wollen</li>
+    </ul>
+
+    <h3>Hauptfunktionen</h3>
+    <ul>
+      <li><strong>Drei-Phasen-Modell:</strong> Plan → Shoot → Review → Archiviert. Jede Phase hat ihre eigene Oberfläche; das Journal bewahrt, was zur Aufnahmezeit galt</li>
+      <li><strong>NOAA-Bedingungs-Snapshot:</strong> Sonnenaufgang, Sonnenuntergang, goldene / blaue / bürgerliche / nautische / astronomische Dämmerung, Mondphase + Auf-/Untergang, Milchstrassen-Kern-Sichtbarkeit — alles auf dem Gerät</li>
+      <li><strong>Mehrtages-Aufschlüsselung:</strong> Goldene und blaue Stunde pro Tag live berechnet für jeden Tag im Planzeitraum</li>
+      <li><strong>Automatische Neuberechnung:</strong> Bedingungen aktualisieren sich automatisch bei Datums- oder Standortänderung im Plan und frieren beim Wechsel zu Shoot ein</li>
+      <li><strong>Hintergrund-GPX-Aufzeichnung:</strong> Drei Sampling-Modi — Sparse (5–30 min, GPS im Duty-Cycle für Akku-Schonung), Standard (15–60 s), Dense (1–10 s, für Wildlife und Events)</li>
+      <li><strong>Foto-Log pro Aufnahme:</strong> Motiv, Objektiv, Filter, Bildnummer und Setup (Aus der Hand, Stativ, Einbeinstativ, Gimbal, Slider, Drohne)</li>
+      <li><strong>Sprachnotizen mit Titel:</strong> AAC im Sitzungsordner; Wiedergabe inline, per Wischen löschbar</li>
+      <li><strong>Referenzbilder:</strong> PHPicker für Inspiration vor dem Shoot; schnelle Referenzaufnahmen aus der iPhone-Kamera während des Shoots</li>
+      <li><strong>Pre-Shoot-Checkliste:</strong> Wiederverwendbare Vorlagen, damit das Packen für ein Astro-Shooting nicht jedes Mal von vorne beginnt</li>
+      <li><strong>Ausrüstungsliste mit Snapshot-Semantik:</strong> Deine Auswahl überlebt Umbenennungen im Quell-Gear-Katalog — das Journal hält fest, was du tatsächlich dabeihattest</li>
+      <li><strong>Scoped Tags:</strong> <code>subject:landscape</code>, <code>location:wallis</code>, <code>mood:moody</code>, plus eigene Präfixe</li>
+      <li><strong>Trips:</strong> Mehrere Shootings unter einem Trip bündeln («Island 2026», «Provence Lavendel-Woche») mit einer Währung, einem Zeitraum und aggregierten Kosten</li>
+      <li><strong>Kostenverfolgung:</strong> Geschätzt im Plan, tatsächlich im Review, mit Live-Differenz. Trip-übergreifende Posten (Flüge, Hotel, Mietwagen) getrennt von den Pro-Shooting-Ausgaben</li>
+      <li><strong>50+ Währungen:</strong> Kuratierter Picker (CHF, EUR, USD, GBP, JPY, CLP, ARS, ISK, PEN, BTN…) plus «Andere…» für jeden 3-buchstabigen ISO-4217-Code</li>
+      <li><strong>Einseitiger PDF-Shooting-Bericht:</strong> Titel, Datum, Ort, Plan, Bedingungen, Ausrüstung, Reflexion, Bewertung, Verwertung, Kosten, Foto-Log und GPX-Statistik — zum Ablegen, Drucken oder Anhängen an einen Wettbewerbsbeitrag</li>
+      <li><strong>Astro-Erscheinungsmodus:</strong> Rot auf Schwarz zur Erhaltung der Dunkeladaption unter der Milchstrasse</li>
+      <li><strong>Reflexions-Prompts:</strong> Was funktionierte, was nicht, Lektionen, Bedingungen vs. Erwartung, freie Notizen — fünf strukturierte Fragen pro Shooting</li>
+      <li><strong>Sterne-Bewertung + Verwertung:</strong> 0–5 Sterne pro Shooting, plus getaggte Verwertung (publiziert, gedruckt, eingereicht, archiviert, Reshoot nötig)</li>
+      <li><strong>Aktiv vs. Archiv:</strong> Abgeschlossene Journal-Einträge sind unter aktiver Arbeit gruppiert, mit einem Filter auf Standort / Datum / Trip</li>
+      <li><strong>Lösch-Bestätigung:</strong> Wischen-zum-Löschen fragt erst nach — keine stille Zerstörung von GPX, Sprachnotizen und Foto-Log</li>
+      <li><strong>iCloud-Privatsynchronisation:</strong> Nur Metadaten; Binärdaten bleiben auf dem aufnehmenden Gerät</li>
+      <li><strong>EN + DE:</strong> Vollständig lokalisiert in Englisch und Deutsch, mit Foto-Jargon («Shooting», «Aufnahme», «goldene Stunde», «Milchstrasse»)</li>
+      <li><strong>Made in Switzerland 🇨🇭</strong></li>
+    </ul>
+
+    <div class="note">
+      <strong>Astro-Genauigkeits-Hinweis:</strong> Mondphase und Milchstrassen-Berechnungen sind <em>journal-tauglich</em> — auf etwa eine Stunde genau, nicht bogensekundengenau. Die synodische Mondphase ignoriert Perturbations­terme; die Milchstrassen-Sichtbarkeit nähert den galaktischen Kern als Punkt bei Sagittarius A* an. Reicht für «ist Vollmond am Wochenende» und «kann ich heute Nacht den Kern fotografieren» — kein Ersatz für ein Planetarium.
+    </div>
+
+    <div class="note">
+      <strong>Sync-Grenzen in v1:</strong> Die private CloudKit-Datenbank synchronisiert Metadaten (Shootings, Trips, Pläne, Reflexionen, Kosten, Foto-Log). Schwere Artefakte — die GPX-Datei, Sprachnotizen, Referenzaufnahmen und generierte PDFs — bleiben aktuell auf dem aufnehmenden Gerät. Multi-Device-Sync für Binärdaten ist auf der Roadmap.
+    </div>
+
+    <h3>Warum SessionTrail?</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>📔 Journal-First</h4>
+        <p>Das Shooting ist der Atom — nicht die Datei. Bilder bleiben auf der Karte; das Journal hält Absicht, Bedingungen und Erkenntnisse fest.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌅 NOAA-Bedingungen</h4>
+        <p>Sonnenaufgang, Sonnenuntergang, goldene / blaue / bürgerliche / nautische / astronomische Dämmerung, Mondphase, Milchstrassen-Sichtbarkeit — auf dem Gerät berechnet.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📍 Hintergrund-GPX</h4>
+        <p>Drei Sampling-Modi mit Duty-Cycle-GPS für lange Sparse-Intervalle. PhotoMetaPro-kompatibles GPX 1.1.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📸 Foto-Log</h4>
+        <p>Pro Aufnahme: Motiv, Objektiv, Filter, Bildnummer, Setup. Antippbar zum Bearbeiten; im Editor löschbar.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🎙️ Sprachnotizen</h4>
+        <p>Mit Titeln, inline abspielbar, per Wischen löschbar. AAC-Audio im Sprach-Ordner des Shootings.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🧳 Trips</h4>
+        <p>Shootings unter einem Trip mit einer Währung, einem Zeitraum und aggregierter Kostenübersicht über alle Mitglied-Shootings.</p>
+      </div>
+      <div class="feature-card">
+        <h4>💰 Kostenverfolgung</h4>
+        <p>Geschätzt im Plan, tatsächlich im Review, Live-Differenz (rot über Budget, grün darunter). 50+ Währungen plus jeder beliebige ISO-Code.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📄 PDF-Berichte</h4>
+        <p>Einseitiger Shooting-Bericht zum Drucken, Ablegen oder Anhängen an Wettbewerbe. Trip-Karte + Standort-Triple + Kosten.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌌 Astro-Modus</h4>
+        <p>Rot auf Schwarz erhält die Dunkeladaption — derselbe Trick, den Sternwarten verwenden, um die Nachtsicht intakt zu halten.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🔒 Datenschutz by Design</h4>
+        <p>Private CloudKit-Datenbank für Metadaten; schwere Artefakte bleiben auf dem Gerät. Keine Drittanbieter-Analytik, keine Tracker.</p>
+      </div>
+      <div class="feature-card">
+        <h4>☁️ iCloud-Sync</h4>
+        <p>Shootings und Trips synchronisieren über deine private CloudKit-Datenbank zwischen deinen Geräten. Kein Konto ausser deiner Apple-ID.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🇨🇭 Made in Switzerland</h4>
+        <p>Mit Schweizer Präzision entwickelt. Von einem aktiven Fotografen für aktive Fotografen gebaut.</p>
+      </div>
+    </div>
+
+    <div class="disclaimer-box">
+      <strong>⚠️ Wichtiger Haftungsausschluss</strong>
+      <p><strong>Nutzung auf eigenes Risiko:</strong> SessionTrail wird «wie besehen» ohne Gewährleistung bereitgestellt. Der Entwickler haftet nicht für Schäden, Verluste oder Probleme aus der Nutzung dieser App — einschliesslich Datenverlust, verpasster Aufnahmen oder ungenauer astronomischer Berechnungen.</p>
+      <p><strong>Astronomische Berechnungen:</strong> Sonnen­aufgangs- / Sonnen­untergangs- / Dämmerungs- / Mondphasen- / Milchstrassen-Zeiten sind journal-taugliche Näherungen und sollten nicht alleinige Grundlage für zeitkritische Astrofotografie-Entscheidungen sein. Mit PhotoPills, Stellarium oder einem Planetarium für bogensekundengenaue Planung gegenprüfen.</p>
+      <p><strong>Verantwortung des Nutzers:</strong> Du bist verantwortlich für deine Daten-Backups via iCloud und für die Überprüfung, dass GPX-Exporte korrekt in deine nachgelagerten Werkzeuge importiert werden (PhotoMetaPro, Lightroom etc.).</p>
+    </div>
+
+    <a href="https://apps.apple.com/app/sessiontrail/id6763770831" class="button">Im App Store laden</a>
+  </div>
+</div><!-- /home -->
+
+<!-- ════════════════════════════ SUPPORT ════════════════════════════ -->
+<div id="support" class="section hidden">
+  <!-- English -->
+  <div class="lang lang-en">
+    <h2>Support &amp; Help</h2>
+    <p>Need a hand with SessionTrail? Drop us a line.</p>
+    <h3>Contact</h3>
+    <p>Email: <a href="mailto:bandurria.apps@gmail.com">bandurria.apps@gmail.com</a></p>
+    <p>We typically respond within 24–48 hours, though response times are not guaranteed.</p>
+
+    <h3>Frequently Asked Questions</h3>
+
+    <div class="faq-item">
+      <strong>What's the difference between a session and a trip?</strong>
+      A session is one shoot — possibly multi-day. A trip groups multiple sessions under one named container (e.g. "Iceland 2026") with a single currency and trip-level cost pots for incidentals like flights and hotel. Sessions can stay standalone forever; trips are optional grouping.
+    </div>
+
+    <div class="faq-item">
+      <strong>How does the currency get picked?</strong>
+      Three-tier cascade: 1) if the session is in a trip, the trip's currency wins; 2) otherwise the base currency from Settings; 3) device locale as fallback. Changing the base currency in Settings only affects new sessions — old ones keep what they were created with, so a photographer who relocates doesn't have last year's CHF amounts silently re-interpreted as USD.
+    </div>
+
+    <div class="faq-item">
+      <strong>How does the conditions snapshot handle multi-day shoots?</strong>
+      The stored snapshot freezes the start day (so the journal preserves what you actually planned around). Below it, a per-day breakdown shows golden hour and blue hour computed live for each calendar day in the planned window. No extra storage — recomputed on demand.
+    </div>
+
+    <div class="faq-item">
+      <strong>What's Astro mode?</strong>
+      Settings → Appearance → Astro pairs a dark color scheme with red accents — the same trick astronomy observatories use to keep your dark-adapted vision intact at night. Pick it before you head out under the Milky Way.
+    </div>
+
+    <div class="faq-item">
+      <strong>How do I get the GPX track into PhotoMetaPro?</strong>
+      On the Review tab, the Track section has a Share button. AirDrop the file to your Mac, or save it to iCloud Drive, then use PhotoMetaPro's Import button — the GPX format matches its expected import exactly.
+    </div>
+
+    <div class="faq-item">
+      <strong>Archive or delete a session — what's the difference?</strong>
+      Archive moves the session to a separate section on the list — it's still there, fully editable, and you can unarchive any time. Delete is permanent: it removes the GPX track, voice memos, photo log and reference snaps along with the metadata. The list always asks to confirm before deleting.
+    </div>
+
+    <div class="faq-item">
+      <strong>How do I save battery during a long shoot?</strong>
+      Pick Sparse sampling on the Shoot tab and set a long interval (5–30 min). The GPS sleeps between samples — at a 10-min interval that's roughly a 5% duty cycle, so battery lasts much longer than continuous tracking. Standard mode is the default for typical hikes; Dense is for wildlife / events where every step matters.
+    </div>
+
+    <div class="faq-item">
+      <strong>Does my data sync across devices?</strong>
+      Metadata syncs via your private CloudKit database (sessions, trips, plans, reflections, costs, the photo log). Heavy artifacts (GPX file, voice memos, reference snaps, generated PDFs) stay on the device they were captured on for v1. Multi-device sync of those binaries is on the roadmap.
+    </div>
+
+    <div class="faq-item">
+      <strong>Why does the conditions snapshot freeze when I tap Start Shoot?</strong>
+      Journal preservation. Once you've started shooting, the journal needs to remember the conditions you actually planned around — even if the calculator gets a bug-fix later or you tweak the date for some reason. During Plan it auto-recomputes; once you advance, it locks.
+    </div>
+
+    <div class="faq-item">
+      <strong>Can I have multiple sessions in the same trip?</strong>
+      Yes — that's the whole point of trips. Open the trip from the suitcase button on the Sessions list, drill into the trip detail, and tap "Add session to trip" at the bottom to create a fresh session inside it. Currency and cost-rollup are handled automatically.
+    </div>
+
+    <div class="faq-item">
+      <strong>What happens to the data when I delete the app?</strong>
+      iOS removes everything — local files (GPX, voice, reference snaps, PDFs) and the local copy of the SwiftData store. Your CloudKit data is preserved in your iCloud account; reinstalling and signing in gets the metadata back. Heavy artifacts captured on the deleted device are not recoverable in v1.
+    </div>
+  </div>
+
+  <!-- German -->
+  <div class="lang lang-de hidden">
+    <h2>Support &amp; Hilfe</h2>
+    <p>Brauchst du Hilfe mit SessionTrail? Schreib uns.</p>
+    <h3>Kontakt</h3>
+    <p>E-Mail: <a href="mailto:bandurria.apps@gmail.com">bandurria.apps@gmail.com</a></p>
+    <p>Wir antworten in der Regel innerhalb von 24–48 Stunden, ohne Garantie für Antwortzeiten.</p>
+
+    <h3>Häufig gestellte Fragen</h3>
+
+    <div class="faq-item">
+      <strong>Was ist der Unterschied zwischen einem Shooting und einem Trip?</strong>
+      Ein Shooting ist eine Aufnahme — ggf. mehrtägig. Ein Trip bündelt mehrere Shootings unter einem benannten Container (z. B. «Island 2026») mit einer einzigen Währung und Trip-übergreifenden Kostenposten für Flüge, Hotel etc. Shootings können dauerhaft Einzel bleiben; Trips sind optional.
+    </div>
+
+    <div class="faq-item">
+      <strong>Wie wird die Währung gewählt?</strong>
+      Drei Stufen: 1) Ist das Shooting in einem Trip, gewinnt die Trip-Währung; 2) sonst die Basiswährung aus den Einstellungen; 3) Geräte-Locale als Fallback. Eine Änderung der Basiswährung gilt nur für neue Shootings — alte behalten ihre Originalwährung, sodass ein Fotograf, der umzieht, nicht plötzlich letzte Jahres CHF-Beträge stillschweigend als USD interpretiert sieht.
+    </div>
+
+    <div class="faq-item">
+      <strong>Wie funktioniert der Bedingungs-Snapshot bei mehrtägigen Shootings?</strong>
+      Der gespeicherte Snapshot friert das Startdatum ein (so bleibt im Journal, womit du geplant hast). Darunter zeigt eine Tagesaufschlüsselung goldene und blaue Stunde live für jeden Kalendertag im Plan-Zeitraum. Kein zusätzlicher Speicher — On-Demand neu berechnet.
+    </div>
+
+    <div class="faq-item">
+      <strong>Was ist der Astro-Modus?</strong>
+      Einstellungen → Erscheinungsbild → Astro kombiniert ein dunkles Schema mit roten Akzenten — derselbe Trick, den Sternwarten verwenden, um die Dunkeladaption nachts zu bewahren. Vor dem Aufbruch unter die Milchstrasse aktivieren.
+    </div>
+
+    <div class="faq-item">
+      <strong>Wie bringe ich den GPX-Track in PhotoMetaPro?</strong>
+      Im Review-Tab hat die Track-Sektion einen Teilen-Button. Per AirDrop an deinen Mac schicken oder in iCloud Drive ablegen, dann in PhotoMetaPro über den Import-Button laden — das GPX-Format passt exakt.
+    </div>
+
+    <div class="faq-item">
+      <strong>Archivieren oder löschen — was ist der Unterschied?</strong>
+      Archivieren verschiebt das Shooting in eine eigene Sektion — es bleibt vollständig erhalten und editierbar, du kannst es jederzeit aus dem Archiv holen. Löschen ist endgültig: GPX-Track, Sprachnotizen, Foto-Log und Referenzaufnahmen werden mit den Metadaten entfernt. Die Liste fragt vor jedem Löschen nach.
+    </div>
+
+    <div class="faq-item">
+      <strong>Wie spare ich Akku bei langen Shootings?</strong>
+      Im Shoot-Tab Sparse-Sampling wählen und ein langes Intervall einstellen (5–30 min). Das GPS schläft zwischen den Aufzeichnungen — bei 10 min Intervall etwa 5% Duty Cycle, also viel länger Akku als kontinuierliches Tracking. Standard ist Default für typische Wanderungen; Dense für Wildlife / Events, wo jeder Schritt zählt.
+    </div>
+
+    <div class="faq-item">
+      <strong>Synchronisieren sich meine Daten zwischen Geräten?</strong>
+      Metadaten synchronisieren über deine private CloudKit-Datenbank (Shootings, Trips, Pläne, Reflexionen, Kosten, Foto-Log). Schwere Artefakte (GPX-Datei, Sprachnotizen, Referenzaufnahmen, generierte PDFs) bleiben in v1 auf dem aufnehmenden Gerät. Multi-Device-Sync für Binärdaten ist auf der Roadmap.
+    </div>
+
+    <div class="faq-item">
+      <strong>Warum friert der Bedingungs-Snapshot ein, wenn ich «Start Shoot» tippe?</strong>
+      Journal-Bewahrung. Sobald du mit dem Shooting begonnen hast, muss das Journal die Bedingungen festhalten, mit denen du tatsächlich geplant hast — auch wenn der Berechner später einen Bugfix bekommt oder du das Datum aus irgendeinem Grund änderst. Während der Plan-Phase berechnet er sich automatisch neu; nach dem Wechsel ist er gesperrt.
+    </div>
+
+    <div class="faq-item">
+      <strong>Kann ich mehrere Shootings im selben Trip haben?</strong>
+      Ja — genau dafür sind Trips da. Öffne den Trip über den Koffer-Button in der Shooting-Liste, navigiere ins Trip-Detail und tippe unten auf «Shooting zum Trip hinzufügen», um eine neue Sitzung darin anzulegen. Währung und Kostenrollup werden automatisch verwaltet.
+    </div>
+
+    <div class="faq-item">
+      <strong>Was passiert mit den Daten, wenn ich die App lösche?</strong>
+      iOS entfernt alles — lokale Dateien (GPX, Sprachnotizen, Referenzaufnahmen, PDFs) und die lokale Kopie der SwiftData-Datenbank. Deine CloudKit-Daten bleiben in deinem iCloud-Konto erhalten; nach Neuinstallation und Anmeldung sind die Metadaten zurück. Schwere Artefakte vom gelöschten Gerät sind in v1 nicht wiederherstellbar.
+    </div>
+  </div>
+</div><!-- /support -->
+
+<!-- ════════════════════════════ PRIVACY ════════════════════════════ -->
+<div id="privacy" class="section hidden privacy-section">
+  <!-- English -->
+  <div class="lang lang-en">
+    <h2>Privacy Policy</h2>
+    <p><em>Last updated: April 2026</em></p>
+
+    <h3>Data Collection</h3>
+    <p>SessionTrail does not collect, transmit, or store any personal data on third-party servers. The only network endpoint we use is your own private iCloud database, which is governed entirely by Apple's privacy policy and is bound to your Apple ID.</p>
+
+    <h3>What's Stored Where</h3>
+    <ul>
+      <li><strong>iCloud private database (CloudKit):</strong> session metadata, plans, reflections, ratings, outcomes, costs, photo log entries, voice memo metadata, trip records, tags, templates, and conditions snapshots. This is your private data — visible only to you, on your devices.</li>
+      <li><strong>Local device only:</strong> the GPX file (track.gpx), the voice memo audio (.m4a), reference capture images, and generated PDF shoot reports. Heavy artifacts stay on the recording device in v1.</li>
+      <li><strong>UserDefaults (local only):</strong> appearance preference, base currency, archived-session counter, last-review-prompt version, onboarding seen flag.</li>
+    </ul>
+
+    <h3>No Analytics, No Trackers</h3>
+    <p>SessionTrail does not include any third-party analytics, crash reporting, advertising or tracking SDKs. No Google Analytics, no Mixpanel, no Firebase, nothing. Your usage patterns are not measured by us or anyone else.</p>
+
+    <h3>No Account Required</h3>
+    <p>SessionTrail uses your existing Apple ID for iCloud sync — there's no separate account, no email signup, no password to set. If you don't sign into iCloud, the app still works fully on a single device.</p>
+
+    <h3>Permissions</h3>
+    <ul>
+      <li><strong>Location:</strong> only when you tap "Use my location" or start a GPX recording. Background location is requested for continued recording when the screen is off; it stops when you tap Stop or "Wrap Up &amp; Review".</li>
+      <li><strong>Microphone:</strong> only when you start a voice memo recording. Audio is written locally; we never upload it.</li>
+      <li><strong>Photo Library:</strong> only when you add reference images via PHPicker.</li>
+      <li><strong>Camera:</strong> only when you take a quick reference snap.</li>
+    </ul>
+
+    <h3>Maps &amp; Geocoding</h3>
+    <p>We use Apple's MapKit (for the location picker and the GPX track preview) and Apple's CLGeocoder (for reverse-geocoding city + country from a coordinate). Both are governed by Apple's privacy policy. We never send your coordinates to any third-party server.</p>
+
+    <h3>Notifications</h3>
+    <p>SessionTrail registers for remote notifications to support CloudKit push (so changes from another device land quickly) but does not send marketing pushes. The only user-facing notification is the in-app review prompt after the third archived session.</p>
+
+    <h3>Children's Privacy</h3>
+    <p>SessionTrail is rated 4+ and does not knowingly collect data from anyone, regardless of age.</p>
+
+    <h3>Contact</h3>
+    <p>Privacy questions? Email <a href="mailto:bandurria.apps@gmail.com">bandurria.apps@gmail.com</a>.</p>
+  </div>
+
+  <!-- German -->
+  <div class="lang lang-de hidden">
+    <h2>Datenschutzrichtlinie</h2>
+    <p><em>Zuletzt aktualisiert: April 2026</em></p>
+
+    <h3>Datenerhebung</h3>
+    <p>SessionTrail erhebt, überträgt oder speichert keine persönlichen Daten auf Drittanbieter-Servern. Der einzige verwendete Netzwerk-Endpunkt ist deine eigene private iCloud-Datenbank, die vollständig Apples Datenschutzrichtlinie unterliegt und an deine Apple-ID gebunden ist.</p>
+
+    <h3>Was wird wo gespeichert</h3>
+    <ul>
+      <li><strong>iCloud private Datenbank (CloudKit):</strong> Shooting-Metadaten, Pläne, Reflexionen, Bewertungen, Verwertung, Kosten, Foto-Log-Einträge, Sprachnotiz-Metadaten, Trip-Datensätze, Tags, Vorlagen und Bedingungs-Snapshots. Das sind deine privaten Daten — nur für dich auf deinen Geräten sichtbar.</li>
+      <li><strong>Nur lokal auf dem Gerät:</strong> die GPX-Datei (track.gpx), die Sprachnotiz-Audios (.m4a), Referenzaufnahme-Bilder und generierte PDF-Shooting-Berichte. Schwere Artefakte bleiben in v1 auf dem aufnehmenden Gerät.</li>
+      <li><strong>UserDefaults (nur lokal):</strong> Erscheinungsbild-Einstellung, Basiswährung, Archiv-Zähler, letzte Review-Prompt-Version, Onboarding-Gesehen-Flag.</li>
+    </ul>
+
+    <h3>Keine Analytik, keine Tracker</h3>
+    <p>SessionTrail enthält keine Drittanbieter-Analytik-, Crash-Reporting-, Werbe- oder Tracking-SDKs. Kein Google Analytics, kein Mixpanel, kein Firebase, nichts. Deine Nutzungsmuster werden weder von uns noch von sonst jemandem gemessen.</p>
+
+    <h3>Keine Anmeldung erforderlich</h3>
+    <p>SessionTrail nutzt deine bestehende Apple-ID für iCloud-Sync — kein separates Konto, keine E-Mail-Anmeldung, kein Passwort. Auch ohne iCloud-Anmeldung funktioniert die App vollständig auf einem einzelnen Gerät.</p>
+
+    <h3>Berechtigungen</h3>
+    <ul>
+      <li><strong>Standort:</strong> nur wenn du «Meinen Standort verwenden» tippst oder eine GPX-Aufzeichnung startest. Hintergrund-Standort wird für die weitere Aufzeichnung bei ausgeschaltetem Bildschirm angefordert; endet beim Tippen auf Stop oder «Abschliessen &amp; Review».</li>
+      <li><strong>Mikrofon:</strong> nur wenn du eine Sprachnotiz aufnimmst. Audio wird lokal geschrieben; wir laden es nie hoch.</li>
+      <li><strong>Fotos:</strong> nur wenn du Referenzbilder via PHPicker hinzufügst.</li>
+      <li><strong>Kamera:</strong> nur wenn du eine schnelle Referenzaufnahme machst.</li>
+    </ul>
+
+    <h3>Karten &amp; Geocoding</h3>
+    <p>Wir verwenden Apples MapKit (für den Standort-Picker und die GPX-Track-Vorschau) und Apples CLGeocoder (für die Reverse-Geocodierung von Stadt + Land aus einer Koordinate). Beide unterliegen Apples Datenschutzrichtlinie. Wir senden deine Koordinaten nie an einen Drittanbieter-Server.</p>
+
+    <h3>Benachrichtigungen</h3>
+    <p>SessionTrail registriert sich für Remote-Benachrichtigungen, um CloudKit-Push zu unterstützen (damit Änderungen von einem anderen Gerät schnell ankommen), sendet aber keine Marketing-Pushes. Die einzige nutzersichtbare Benachrichtigung ist die In-App-Review-Aufforderung nach dem dritten archivierten Shooting.</p>
+
+    <h3>Datenschutz für Kinder</h3>
+    <p>SessionTrail ist mit 4+ bewertet und sammelt wissentlich keine Daten von irgendeiner Person, unabhängig vom Alter.</p>
+
+    <h3>Kontakt</h3>
+    <p>Datenschutzfragen? E-Mail an <a href="mailto:bandurria.apps@gmail.com">bandurria.apps@gmail.com</a>.</p>
+  </div>
+</div><!-- /privacy -->
+</div><!-- /container -->
+
+<!-- ════════════════════════════ FOOTER ════════════════════════════ -->
+<footer>
+  <p>© 2026 SessionTrail by Andres Wetzel &bull; <a href="mailto:bandurria.apps@gmail.com">bandurria.apps@gmail.com</a> &bull; Made in Switzerland 🇨🇭</p>
+  <p style="font-size: 0.85em; margin-top: 10px;">
+    SessionTrail is provided "as is" without warranties. Astronomical calculations are journal-grade approximations only. Users are responsible for data accuracy and backups. Developer not liable for damages or data loss.
+  </p>
+</footer>
+</body>
+</html>
