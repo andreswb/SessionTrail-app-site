@@ -110,20 +110,34 @@
     <ul>
       <li><strong>Three-phase model:</strong> Plan → Shoot → Review → Archived. Each phase has its own surface; the journal preserves what was true at shoot time</li>
       <li><strong>NOAA conditions snapshot:</strong> Sunrise, sunset, golden / blue / civil / nautical / astronomical twilight, moon phase + rise/set, Milky Way galactic-core visibility — all on-device</li>
+      <li><strong>Destination local time:</strong> Sun, moon and Milky Way times automatically render in the destination's wall clock, not your device's. A session in Tokyo viewed from Berlin shows Tokyo's sunrise — no mental conversion required</li>
       <li><strong>Multi-day breakdown:</strong> Per-day golden / blue hour computed live for every day in the planned window</li>
       <li><strong>Auto-recompute:</strong> Conditions refresh automatically when you tweak the date or location during the Plan phase, then freeze when you advance to Shoot</li>
       <li><strong>Background GPX recording:</strong> Three sampling modes — Sparse (5–30 min, GPS duty-cycled to save battery), Standard (15–60 s), Dense (1–10 s, for wildlife and events)</li>
+      <li><strong>Multiple GPX tracks per session:</strong> One session can hold many recordings (morning hike, evening walk, dawn excursion). Each is renameable, individually shareable, with its own time range and point count</li>
+      <li><strong>Day-chip strip on Shoot tab:</strong> Multi-day sessions filter photo log, voice memos, reference snaps and tracks per planned day — entry counts shown right on the chip</li>
+      <li><strong>Out-of-window validation:</strong> When you log a frame whose timestamp lands outside the planned shoot window, SessionTrail asks before saving and offers to extend the session dates so the entry lands on the right day</li>
       <li><strong>Photo log per frame:</strong> Subject, lens, filter, frame number, and stabilization setup (handheld, tripod, monopod, gimbal, slider, drone)</li>
       <li><strong>Voice memos with titles:</strong> AAC into a per-session folder; playback, swipe-to-delete, transcription-ready</li>
       <li><strong>Reference imagery:</strong> PHPicker for inspiration before the shoot; quick reference snaps from the iPhone camera during the shoot</li>
       <li><strong>Pre-shoot checklist:</strong> Reusable templates so packing for an astro shoot doesn't start from scratch every time</li>
+      <li><strong>Session templates:</strong> Save a complete plan (subject, target output, gear, checklist) as a reusable preset — apply it once and the new session is set up</li>
+      <li><strong>GearGrove kit sync:</strong> Apply gear kits managed in our companion app GearGrove with one tap; lent / returned items propagate automatically via App Group</li>
       <li><strong>Gear kit with snapshot semantics:</strong> Your loadout survives renames in the source gear catalog — the journal records what you actually took</li>
       <li><strong>Scoped tags:</strong> <code>subject:landscape</code>, <code>location:wallis</code>, <code>mood:moody</code>, plus custom prefixes</li>
       <li><strong>Trips:</strong> Group multi-session journeys ("Iceland 2026", "Provence Lavender Week") with one currency, one window, and aggregated costs</li>
       <li><strong>Cost tracking:</strong> Estimated on Plan, actual on Review, with live variance. Trip-level incidentals (flights, hotel, car rental) separate from per-shoot expenses</li>
       <li><strong>50+ currencies:</strong> Curated picker (CHF, EUR, USD, GBP, JPY, CLP, ARS, ISK, PEN, BTN…) plus an "Other…" entry that accepts any 3-letter ISO 4217 code</li>
       <li><strong>One-page PDF shoot report:</strong> Title, dates, location, plan, conditions, gear, reflection, rating, outcomes, costs, photo log table, GPX stats — ready to file, print, or attach to a competition entry</li>
+      <li><strong>Multi-page Trip PDF:</strong> Cover page (name, dates, location, currency, cost aggregate) plus one concise page per member session — perfect for portfolio submissions and grant applications</li>
+      <li><strong>Session bundle ZIP:</strong> Export the entire session (every GPX track, voice memo, reference snap and reference image, plus a session.json manifest) in a single archive for cold storage or handoff</li>
+      <li><strong>GPX-only bundle:</strong> Lightweight ZIP of just the tracks (renamed in chronological order) plus a manifest with labels, time ranges and point counts</li>
+      <li><strong>Session &amp; Trip recap views:</strong> Beautiful one-page summaries you can share as PNG straight from the app — great for Instagram, story-style trip reports, or sending a teaser to a client</li>
       <li><strong>Astro appearance mode:</strong> Red on black to preserve dark adaptation under the Milky Way</li>
+      <li><strong>Theme picker:</strong> Light, Dark, System, or Astro from Settings</li>
+      <li><strong>First-launch onboarding:</strong> Quick tour of the three-phase model and the gear kit philosophy so newcomers don't bounce</li>
+      <li><strong>In-app Help &amp; FAQ:</strong> Settings → Help answers the same questions you'd email about, without leaving the app</li>
+      <li><strong>Toast / banner error UI:</strong> Recording failures, voice-memo glitches, missing permissions, kit-sync hiccups — every failure surfaces visibly so nothing is silently lost</li>
       <li><strong>Reflection prompts:</strong> What worked, what didn't, lessons, conditions vs. expectation, free notes — five structured questions per session</li>
       <li><strong>Star rating + outcomes:</strong> 0–5 stars on the session, plus tagged outcomes (published, printed, submitted, archived, reshoot needed)</li>
       <li><strong>Active vs Archived sections:</strong> Closed journal entries collapse below active work, with a top-level filter for location / date range / trip</li>
@@ -132,6 +146,18 @@
       <li><strong>EN + DE:</strong> Full localization for English and German, with photographer jargon ("Shooting", "Aufnahme", "goldene Stunde", "Milchstrasse")</li>
       <li><strong>Made in Switzerland 🇨🇭</strong></li>
     </ul>
+    <h3>Free vs. SessionTrail Pro</h3>
+    <p>SessionTrail's full Plan → Shoot → Review workflow is free. SessionTrail Pro unlocks the features serious and travelling photographers reach for most. One-time unlock — no subscription.</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>✅ Free tier</h4>
+        <p>Full Plan / Shoot / Review workflow · NOAA conditions snapshot (sun / golden / blue / twilight / moon / Milky Way) with destination-local time · photo log with every field · voice memos · reference snaps · single-track Standard-mode GPX recording · checklist + session templates · iCloud private sync · Astro theme · EN + DE localization.</p>
+      </div>
+      <div class="feature-card">
+        <h4>⭐ SessionTrail Pro</h4>
+        <p>Multi-day day-chip filter on Shoot · Trips with cost tracking + currency aggregation · per-session and multi-page Trip PDF reports · multiple GPX tracks per session · Sparse + Dense (battery-aware) sampling modes · session bundle ZIP + GPX-only ZIP exports · GearGrove kit sync · PNG recap sharing for sessions and trips.</p>
+      </div>
+    </div>
 
     <div class="note">
       <strong>Astro accuracy disclaimer:</strong> Lunar phase and Milky Way calculations are <em>journal grade</em> — within an hour or so, not arcsecond accurate. Synodic-month moon phase ignores perturbation terms; Milky Way visibility approximates the galactic core as a single point at Sagittarius A*. Plenty for "is the moon full this weekend" and "can I shoot the core tonight" decisions; not a substitute for a planetarium.
@@ -153,11 +179,15 @@
       </div>
       <div class="feature-card">
         <h4>📍 Background GPX</h4>
-        <p>Three sampling modes with duty-cycled GPS for long Sparse intervals. PhotoMetaPro-compatible GPX 1.1 output.</p>
+        <p>Three sampling modes with duty-cycled GPS for long Sparse intervals. Multiple tracks per session. PhotoMetaPro-compatible GPX 1.1 output.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌐 Destination-local time</h4>
+        <p>Sun, moon and Milky Way times automatically render in the destination's wall clock — no mental conversion when you're planning a shoot abroad.</p>
       </div>
       <div class="feature-card">
         <h4>📸 Photo log</h4>
-        <p>Per-frame: subject, lens, filter, frame number, stabilization. Tappable to edit; deletable from the editor.</p>
+        <p>Per-frame: subject, lens, filter, frame number, stabilization. Out-of-window timestamps trigger a warning so entries land on the right day.</p>
       </div>
       <div class="feature-card">
         <h4>🎙️ Voice memos</h4>
@@ -173,7 +203,19 @@
       </div>
       <div class="feature-card">
         <h4>📄 PDF reports</h4>
-        <p>One-page shoot report ready to print, file, or attach to a competition entry. Trip card + location triple + costs.</p>
+        <p>One-page session report and multi-page Trip PDF. Ready to print, file, or attach to a competition entry / grant application.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🗜️ Bundle export</h4>
+        <p>Full session ZIP (every track + voice memo + reference snap + manifest) or GPX-only ZIP for cold storage and downstream tools.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🖼️ PNG recap</h4>
+        <p>Session and trip recap views shareable as a single image — perfect for Instagram, story-style trip reports, or sending a teaser to a client.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📦 GearGrove sync</h4>
+        <p>Apply gear kits managed in our companion app GearGrove with one tap. Lent / returned items propagate automatically through the App Group.</p>
       </div>
       <div class="feature-card">
         <h4>🌌 Astro mode</h4>
@@ -227,20 +269,34 @@
     <ul>
       <li><strong>Drei-Phasen-Modell:</strong> Plan → Shoot → Review → Archiviert. Jede Phase hat ihre eigene Oberfläche; das Journal bewahrt, was zur Aufnahmezeit galt</li>
       <li><strong>NOAA-Bedingungs-Snapshot:</strong> Sonnenaufgang, Sonnenuntergang, goldene / blaue / bürgerliche / nautische / astronomische Dämmerung, Mondphase + Auf-/Untergang, Milchstrassen-Kern-Sichtbarkeit — alles auf dem Gerät</li>
+      <li><strong>Lokalzeit am Zielort:</strong> Sonnen-, Mond- und Milchstrassen-Zeiten erscheinen automatisch in der Wanduhr des Zielorts, nicht der deines Geräts. Ein Shooting in Tokio von Berlin aus betrachtet zeigt Tokios Sonnenaufgang — keine Kopfrechnerei nötig</li>
       <li><strong>Mehrtages-Aufschlüsselung:</strong> Goldene und blaue Stunde pro Tag live berechnet für jeden Tag im Planzeitraum</li>
       <li><strong>Automatische Neuberechnung:</strong> Bedingungen aktualisieren sich automatisch bei Datums- oder Standortänderung im Plan und frieren beim Wechsel zu Shoot ein</li>
       <li><strong>Hintergrund-GPX-Aufzeichnung:</strong> Drei Sampling-Modi — Sparse (5–30 min, GPS im Duty-Cycle für Akku-Schonung), Standard (15–60 s), Dense (1–10 s, für Wildlife und Events)</li>
+      <li><strong>Mehrere GPX-Tracks pro Shooting:</strong> Ein Shooting kann viele Aufzeichnungen halten (Morgenwanderung, Abendrunde, Dämmerungsausflug). Jede ist umbenennbar, einzeln teilbar, mit eigenem Zeitfenster und Punktanzahl</li>
+      <li><strong>Tagesfilter im Shoot-Tab:</strong> Bei mehrtägigen Shootings filtern Tageschips Foto-Log, Sprachnotizen, Referenzaufnahmen und Tracks nach Plantag — Eintragsanzahl direkt am Chip</li>
+      <li><strong>Validierung bei Eintrag ausserhalb Zeitraum:</strong> Wenn ein Foto-Log-Eintrag ausserhalb des geplanten Sessionzeitraums liegt, fragt SessionTrail nach und bietet an, den Sessionzeitraum zu erweitern, damit der Eintrag am richtigen Tag landet</li>
       <li><strong>Foto-Log pro Aufnahme:</strong> Motiv, Objektiv, Filter, Bildnummer und Setup (Aus der Hand, Stativ, Einbeinstativ, Gimbal, Slider, Drohne)</li>
       <li><strong>Sprachnotizen mit Titel:</strong> AAC im Sitzungsordner; Wiedergabe inline, per Wischen löschbar</li>
       <li><strong>Referenzbilder:</strong> PHPicker für Inspiration vor dem Shoot; schnelle Referenzaufnahmen aus der iPhone-Kamera während des Shoots</li>
       <li><strong>Pre-Shoot-Checkliste:</strong> Wiederverwendbare Vorlagen, damit das Packen für ein Astro-Shooting nicht jedes Mal von vorne beginnt</li>
+      <li><strong>Session-Vorlagen:</strong> Speichere einen vollständigen Plan (Motiv, Zielmedium, Ausrüstung, Checkliste) als wiederverwendbares Preset — einmal anwenden und das neue Shooting ist eingerichtet</li>
+      <li><strong>GearGrove-Kit-Synchronisation:</strong> Wende Ausrüstungs-Kits aus unserer Companion-App GearGrove mit einem Tap an; geliehene / zurückgegebene Items propagieren automatisch via App Group</li>
       <li><strong>Ausrüstungsliste mit Snapshot-Semantik:</strong> Deine Auswahl überlebt Umbenennungen im Quell-Gear-Katalog — das Journal hält fest, was du tatsächlich dabeihattest</li>
       <li><strong>Scoped Tags:</strong> <code>subject:landscape</code>, <code>location:wallis</code>, <code>mood:moody</code>, plus eigene Präfixe</li>
       <li><strong>Trips:</strong> Mehrere Shootings unter einem Trip bündeln («Island 2026», «Provence Lavendel-Woche») mit einer Währung, einem Zeitraum und aggregierten Kosten</li>
       <li><strong>Kostenverfolgung:</strong> Geschätzt im Plan, tatsächlich im Review, mit Live-Differenz. Trip-übergreifende Posten (Flüge, Hotel, Mietwagen) getrennt von den Pro-Shooting-Ausgaben</li>
       <li><strong>50+ Währungen:</strong> Kuratierter Picker (CHF, EUR, USD, GBP, JPY, CLP, ARS, ISK, PEN, BTN…) plus «Andere…» für jeden 3-buchstabigen ISO-4217-Code</li>
       <li><strong>Einseitiger PDF-Shooting-Bericht:</strong> Titel, Datum, Ort, Plan, Bedingungen, Ausrüstung, Reflexion, Bewertung, Verwertung, Kosten, Foto-Log und GPX-Statistik — zum Ablegen, Drucken oder Anhängen an einen Wettbewerbsbeitrag</li>
+      <li><strong>Mehrseitiger Trip-PDF:</strong> Deckblatt (Name, Datum, Ort, Währung, Kostenaggregat) plus eine kompakte Seite pro Mitgliedshooting — perfekt für Portfolio-Einreichungen und Stipendienanträge</li>
+      <li><strong>Session-Paket als ZIP:</strong> Exportiere das gesamte Shooting (jeden GPX-Track, jede Sprachnotiz, jede Referenzaufnahme und jedes Referenzbild plus eine session.json-Manifest-Datei) in einem einzigen Archiv für Cold Storage oder Übergabe</li>
+      <li><strong>GPX-Only-Paket:</strong> Schlankes ZIP mit nur den Tracks (chronologisch umbenannt) plus einem Manifest mit Bezeichnungen, Zeitfenstern und Punktanzahlen</li>
+      <li><strong>Session- &amp; Trip-Recap-Ansichten:</strong> Schöne einseitige Übersichten, die du direkt aus der App als PNG teilen kannst — ideal für Instagram, Story-artige Trip-Berichte oder einen Teaser an Kunden</li>
       <li><strong>Astro-Erscheinungsmodus:</strong> Rot auf Schwarz zur Erhaltung der Dunkeladaption unter der Milchstrasse</li>
+      <li><strong>Theme-Auswahl:</strong> Hell, Dunkel, System oder Astro aus den Einstellungen</li>
+      <li><strong>Onboarding beim Erststart:</strong> Kurze Tour durch das Drei-Phasen-Modell und die Gear-Kit-Philosophie, damit Neueinsteiger nicht abspringen</li>
+      <li><strong>In-App Hilfe &amp; FAQ:</strong> Einstellungen → Hilfe beantwortet die gleichen Fragen, die du sonst per E-Mail stellen würdest, ohne die App zu verlassen</li>
+      <li><strong>Toast / Banner-Fehleranzeige:</strong> Aufnahmefehler, Sprachnotiz-Pannen, fehlende Berechtigungen, Kit-Sync-Probleme — jeder Fehler erscheint sichtbar, damit nichts still verloren geht</li>
       <li><strong>Reflexions-Prompts:</strong> Was funktionierte, was nicht, Lektionen, Bedingungen vs. Erwartung, freie Notizen — fünf strukturierte Fragen pro Shooting</li>
       <li><strong>Sterne-Bewertung + Verwertung:</strong> 0–5 Sterne pro Shooting, plus getaggte Verwertung (publiziert, gedruckt, eingereicht, archiviert, Reshoot nötig)</li>
       <li><strong>Aktiv vs. Archiv:</strong> Abgeschlossene Journal-Einträge sind unter aktiver Arbeit gruppiert, mit einem Filter auf Standort / Datum / Trip</li>
@@ -249,6 +305,18 @@
       <li><strong>EN + DE:</strong> Vollständig lokalisiert in Englisch und Deutsch, mit Foto-Jargon («Shooting», «Aufnahme», «goldene Stunde», «Milchstrasse»)</li>
       <li><strong>Made in Switzerland 🇨🇭</strong></li>
     </ul>
+    <h3>Free vs. SessionTrail Pro</h3>
+    <p>Der vollständige Plan → Shoot → Review-Workflow von SessionTrail ist gratis. SessionTrail Pro schaltet die Funktionen frei, nach denen ernsthafte und reisende Fotografen am häufigsten greifen. Einmaliges Freischalten — kein Abo.</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>✅ Gratis-Tier</h4>
+        <p>Vollständiger Plan / Shoot / Review-Workflow · NOAA-Bedingungs-Snapshot (Sonne / golden / blau / Dämmerung / Mond / Milchstrasse) mit Lokalzeit am Zielort · Foto-Log mit allen Feldern · Sprachnotizen · Referenzaufnahmen · Single-Track GPX-Aufzeichnung im Standard-Modus · Checklist- + Session-Vorlagen · iCloud-Privatsync · Astro-Theme · EN + DE-Lokalisierung.</p>
+      </div>
+      <div class="feature-card">
+        <h4>⭐ SessionTrail Pro</h4>
+        <p>Mehrtages-Tagesfilter im Shoot-Tab · Trips mit Kostenverfolgung + Währungsaggregation · Pro-Shooting- und mehrseitige Trip-PDF-Berichte · mehrere GPX-Tracks pro Shooting · Sparse + Dense (akku-schonende) Sampling-Modi · Session-Paket-ZIP- + GPX-Only-ZIP-Exporte · GearGrove-Kit-Synchronisation · PNG-Recap-Sharing für Shootings und Trips.</p>
+      </div>
+    </div>
 
     <div class="note">
       <strong>Astro-Genauigkeits-Hinweis:</strong> Mondphase und Milchstrassen-Berechnungen sind <em>journal-tauglich</em> — auf etwa eine Stunde genau, nicht bogensekundengenau. Die synodische Mondphase ignoriert Perturbations­terme; die Milchstrassen-Sichtbarkeit nähert den galaktischen Kern als Punkt bei Sagittarius A* an. Reicht für «ist Vollmond am Wochenende» und «kann ich heute Nacht den Kern fotografieren» — kein Ersatz für ein Planetarium.
@@ -270,11 +338,15 @@
       </div>
       <div class="feature-card">
         <h4>📍 Hintergrund-GPX</h4>
-        <p>Drei Sampling-Modi mit Duty-Cycle-GPS für lange Sparse-Intervalle. PhotoMetaPro-kompatibles GPX 1.1.</p>
+        <p>Drei Sampling-Modi mit Duty-Cycle-GPS für lange Sparse-Intervalle. Mehrere Tracks pro Shooting. PhotoMetaPro-kompatibles GPX 1.1.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌐 Lokalzeit am Zielort</h4>
+        <p>Sonnen-, Mond- und Milchstrassen-Zeiten erscheinen automatisch in der Wanduhr des Zielorts — keine Kopfrechnerei beim Planen eines Shootings im Ausland.</p>
       </div>
       <div class="feature-card">
         <h4>📸 Foto-Log</h4>
-        <p>Pro Aufnahme: Motiv, Objektiv, Filter, Bildnummer, Setup. Antippbar zum Bearbeiten; im Editor löschbar.</p>
+        <p>Pro Aufnahme: Motiv, Objektiv, Filter, Bildnummer, Setup. Zeitstempel ausserhalb des Sessionzeitraums lösen eine Warnung aus, damit Einträge am richtigen Tag landen.</p>
       </div>
       <div class="feature-card">
         <h4>🎙️ Sprachnotizen</h4>
@@ -290,7 +362,19 @@
       </div>
       <div class="feature-card">
         <h4>📄 PDF-Berichte</h4>
-        <p>Einseitiger Shooting-Bericht zum Drucken, Ablegen oder Anhängen an Wettbewerbe. Trip-Karte + Standort-Triple + Kosten.</p>
+        <p>Einseitiger Shooting-Bericht und mehrseitiger Trip-PDF. Zum Drucken, Ablegen oder Anhängen an Wettbewerbe / Stipendienanträge.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🗜️ Paket-Export</h4>
+        <p>Vollständiges Session-ZIP (jeder Track + Sprachnotiz + Referenzaufnahme + Manifest) oder GPX-Only-ZIP für Cold Storage und nachgelagerte Werkzeuge.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🖼️ PNG-Recap</h4>
+        <p>Session- und Trip-Recap-Ansichten als einzelnes Bild teilbar — perfekt für Instagram, Story-artige Trip-Berichte oder einen Teaser an Kunden.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📦 GearGrove-Sync</h4>
+        <p>Wende Ausrüstungs-Kits aus unserer Companion-App GearGrove mit einem Tap an. Geliehene / zurückgegebene Items propagieren automatisch via App Group.</p>
       </div>
       <div class="feature-card">
         <h4>🌌 Astro-Modus</h4>
@@ -386,6 +470,34 @@
       <strong>What happens to the data when I delete the app?</strong>
       iOS removes everything — local files (GPX, voice, reference snaps, PDFs) and the local copy of the SwiftData store. Your CloudKit data is preserved in your iCloud account; reinstalling and signing in gets the metadata back. Heavy artifacts captured on the deleted device are not recoverable in v1.
     </div>
+    <div class="faq-item">
+      <strong>Why do sun and Milky Way times sometimes show a "destination local time" label?</strong>
+      Because you're viewing a session whose location is in a different time zone than your device. Apple's date formatter defaults to the device clock — which gives nonsense like "Sunrise 23:11" when you're in Berlin checking a session in Beijing. SessionTrail captures the destination's IANA time zone when you geocode the location and renders all ephemeris in that wall clock instead, with a small disclosure label so you know what you're looking at.
+    </div>
+    <div class="faq-item">
+      <strong>Can I record more than one GPX track in a single session?</strong>
+      Yes — multiple tracks per session is a Pro feature. A morning hike + an evening walk on the same shoot become two separate <code>.gpx</code> files inside the session, each renameable, each individually shareable, with its own time range and point count. The bundle export ZIP includes all of them, named by your label.
+    </div>
+    <div class="faq-item">
+      <strong>What's the difference between the session bundle and the GPX-only bundle?</strong>
+      The full session bundle is a ZIP containing every GPX track, every voice memo, every reference snap and reference image, plus a <code>session.json</code> manifest with all the metadata. The GPX-only bundle is much smaller — just the <code>.gpx</code> files (renamed in chronological order) plus a <code>tracks.json</code> manifest with labels, time ranges and point counts. Both are Pro features.
+    </div>
+    <div class="faq-item">
+      <strong>Why did SessionTrail warn me that my photo log entry is "outside the planned session window"?</strong>
+      Because the timestamp for the entry — usually "now" — falls outside the session's planned start / end. The day-chip filter on the Shoot tab would hide it on every planned day, while the recap card would still count it, leading to a confusing mismatch. The dialog offers three options: add anyway (and use All Days to find it), extend the session dates so the entry lands inside, or cancel.
+    </div>
+    <div class="faq-item">
+      <strong>How does the GearGrove kit sync work?</strong>
+      SessionTrail and our companion gear-management app GearGrove share a private App Group. When you mark a kit as ready in GearGrove, SessionTrail can apply that kit to a session with one tap — the gear loadout is captured as a snapshot so future renames in GearGrove don't rewrite your journal. Lent / returned items propagate automatically. Both apps stay on-device; no third-party server is involved.
+    </div>
+    <div class="faq-item">
+      <strong>Can I share a session as an image?</strong>
+      Yes — open the session and tap the recap icon in the top-right. The recap view is a one-page summary (header, costs, reflection, conditions, photo log) that you can share as a PNG to Instagram, Messages, or anywhere else. Trip recap is the same but spans multiple sessions. Both are Pro features.
+    </div>
+    <div class="faq-item">
+      <strong>What's the difference between the free version and SessionTrail Pro?</strong>
+      The full Plan → Shoot → Review workflow is free, including the NOAA conditions snapshot, photo log with all fields, voice memos, reference snaps, single-track Standard-mode GPX recording, templates, iCloud private sync, Astro theme and full EN + DE localization. SessionTrail Pro unlocks the multi-day day-chip filter, Trips with cost tracking, per-session and Trip PDF reports, multiple GPX tracks per session, Sparse + Dense battery-aware sampling modes, GearGrove kit sync, session bundle ZIP exports, and PNG recap sharing. One-time unlock — no subscription.
+    </div>
   </div>
 
   <!-- German -->
@@ -450,6 +562,34 @@
     <div class="faq-item">
       <strong>Was passiert mit den Daten, wenn ich die App lösche?</strong>
       iOS entfernt alles — lokale Dateien (GPX, Sprachnotizen, Referenzaufnahmen, PDFs) und die lokale Kopie der SwiftData-Datenbank. Deine CloudKit-Daten bleiben in deinem iCloud-Konto erhalten; nach Neuinstallation und Anmeldung sind die Metadaten zurück. Schwere Artefakte vom gelöschten Gerät sind in v1 nicht wiederherstellbar.
+    </div>
+    <div class="faq-item">
+      <strong>Warum erscheint manchmal das Label «Lokalzeit am Zielort» bei Sonnen- und Milchstrassen-Zeiten?</strong>
+      Weil du ein Shooting betrachtest, dessen Ort in einer anderen Zeitzone liegt als dein Gerät. Apples Datumsformatierer nimmt standardmässig die Geräteuhr — das ergibt Unsinn wie «Sonnenaufgang 23:11», wenn du in Berlin ein Shooting in Peking prüfst. SessionTrail erfasst beim Geocoden des Ortes die IANA-Zeitzone des Zielorts und zeigt alle Ephemeriden in dieser Wanduhr, mit einem kleinen Hinweislabel, damit du weisst, was du siehst.
+    </div>
+    <div class="faq-item">
+      <strong>Kann ich mehr als einen GPX-Track in einem einzigen Shooting aufzeichnen?</strong>
+      Ja — mehrere Tracks pro Shooting ist eine Pro-Funktion. Eine Morgenwanderung + ein Abendspaziergang am selben Tag werden zu zwei separaten <code>.gpx</code>-Dateien innerhalb des Shootings, jede umbenennbar, jede einzeln teilbar, mit eigenem Zeitfenster und Punktanzahl. Der Paket-Export-ZIP enthält alle, benannt nach deiner Bezeichnung.
+    </div>
+    <div class="faq-item">
+      <strong>Was ist der Unterschied zwischen Session-Paket und GPX-Only-Paket?</strong>
+      Das vollständige Session-Paket ist ein ZIP mit jedem GPX-Track, jeder Sprachnotiz, jeder Referenzaufnahme und jedem Referenzbild plus einer <code>session.json</code>-Manifest-Datei mit allen Metadaten. Das GPX-Only-Paket ist viel kleiner — nur die <code>.gpx</code>-Dateien (chronologisch umbenannt) plus eine <code>tracks.json</code> mit Bezeichnungen, Zeitfenstern und Punktanzahlen. Beide sind Pro-Funktionen.
+    </div>
+    <div class="faq-item">
+      <strong>Warum hat SessionTrail mich gewarnt, dass mein Foto-Log-Eintrag «ausserhalb des geplanten Sessionzeitraums» liegt?</strong>
+      Weil der Zeitstempel des Eintrags — meistens «jetzt» — ausserhalb des geplanten Anfangs / Endes der Session liegt. Der Tagesfilter im Shoot-Tab würde ihn an jedem geplanten Tag verbergen, während die Recap-Karte ihn weiter zählen würde — eine verwirrende Diskrepanz. Der Dialog bietet drei Optionen: trotzdem hinzufügen (und über Alle Tage finden), den Sessionzeitraum so erweitern, dass der Eintrag drinnen landet, oder abbrechen.
+    </div>
+    <div class="faq-item">
+      <strong>Wie funktioniert die GearGrove-Kit-Synchronisation?</strong>
+      SessionTrail und unsere Companion-Gear-App GearGrove teilen sich eine private App Group. Wenn du in GearGrove ein Kit als bereit markierst, kann SessionTrail dieses Kit mit einem Tap auf ein Shooting anwenden — die Ausrüstungsliste wird als Snapshot festgehalten, sodass spätere Umbenennungen in GearGrove dein Journal nicht überschreiben. Geliehene / zurückgegebene Items propagieren automatisch. Beide Apps bleiben auf dem Gerät; kein Drittanbieter-Server beteiligt.
+    </div>
+    <div class="faq-item">
+      <strong>Kann ich ein Shooting als Bild teilen?</strong>
+      Ja — öffne das Shooting und tippe auf das Recap-Symbol oben rechts. Die Recap-Ansicht ist eine einseitige Übersicht (Header, Kosten, Reflexion, Bedingungen, Foto-Log), die du als PNG nach Instagram, Nachrichten oder anderswo teilen kannst. Trip-Recap ist dasselbe, umfasst aber mehrere Shootings. Beide sind Pro-Funktionen.
+    </div>
+    <div class="faq-item">
+      <strong>Was ist der Unterschied zwischen der Gratis-Version und SessionTrail Pro?</strong>
+      Der vollständige Plan → Shoot → Review-Workflow ist gratis, inklusive NOAA-Bedingungs-Snapshot, Foto-Log mit allen Feldern, Sprachnotizen, Referenzaufnahmen, Single-Track-GPX-Aufzeichnung im Standard-Modus, Vorlagen, iCloud-Privatsync, Astro-Theme und vollständiger EN- + DE-Lokalisierung. SessionTrail Pro schaltet den Mehrtages-Tagesfilter, Trips mit Kostenverfolgung, Pro-Shooting- und Trip-PDF-Berichte, mehrere GPX-Tracks pro Shooting, Sparse + Dense akku-schonende Sampling-Modi, GearGrove-Kit-Synchronisation, Session-Paket-ZIP-Exporte und PNG-Recap-Sharing frei. Einmaliges Freischalten — kein Abo.
     </div>
   </div>
 </div><!-- /support -->
